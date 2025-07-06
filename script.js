@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 2. Define o seu número de WhatsApp para onde as mensagens serão enviadas
             // *** IMPORTANTE: Mude este número para o seu número real do WhatsApp (com 55 e DDD, sem espaços/símbolos)! ***
-            const seuNumeroWhatsApp = '5511916072188'; // Exemplo: '5511993233019'
+            const seuNumeroWhatsApp = '55 11 99323-3019'; // Exemplo: '5511993233019'
 
             // 3. Monta a mensagem que será pré-preenchida no WhatsApp
             // Usamos encodeURIComponent para garantir que a mensagem seja formatada corretamente para a URL.
