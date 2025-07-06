@@ -1,0 +1,1063 @@
+/* ========================================= */
+/* VARIÁVEIS CSS: Cores Globais do Tema    */
+/* Use estas variáveis para padronizar suas cores e facilitar mudanças futuras. */
+/* ========================================= */
+:root {
+    --primary-color: #000000; /* Preto: Usado para texto principal, fundos escuros */
+    --secondary-color: #FFFFFF; /* Branco: Usado para fundos claros, texto em fundos escuros */
+    --accent-color: #FF0000; /* Vermelho: Usado para acentos, títulos, bordas, destaques, foco */
+    --light-gray: #f2f2f2; /* Cinza claro: Para elementos secundários, bordas sutis, divisores */
+    --medium-gray: #ccc; /* Cinza médio: Para bordas, separadores, ícones de fechamento */
+    --dark-gray-text: #333; /* Cinza escuro para textos específicos se necessário (ex: placeholders) */
+    --whatsapp-green: #25d366; /* Verde vibrante do WhatsApp */
+    --whatsapp-green-hover: #1ebe57; /* Verde do WhatsApp um pouco mais escuro no hover */
+    --box-shadow-light: rgba(0,0,0,0.05); /* Sombra suave para profundidade em elementos claros */
+    --box-shadow-medium: rgba(0,0,0,0.15); /* Sombra para elementos em destaque */
+    --box-shadow-dark: rgba(0,0,0,0.35); /* Sombra mais pronunciada para pop-ups */
+    --transition-speed: 0.3s; /* Velocidade padrão para transições de hover/focus */
+    /* NOVAS VARIÁVEIS DE ALTURA DO CABEÇALHO (Ajustadas para logo 150px) */
+    --header-height-desktop: 70px; /* Altura do cabeçalho em desktop */
+    --header-height-tablet: 60px; /* Altura do cabeçalho em tablet */
+    --header-height-mobile: 50px; /* Altura do cabeçalho em mobile */
+}
+
+/* ========================================= */
+/* ESTILOS GLOBAIS E RESET                   */
+/* Aplicações básicas para o corpo da página e elementos fundamentais. */
+/* ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o largura total do elemento */
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif; /* Adicionado Arial como fallback */
+    background: var(--secondary-color); /* Fundo do corpo: Branco */
+    color: var(--primary-color); /* Cor do texto principal: Preto */
+    line-height: 1.6; /* Espaçamento entre linhas para melhor legibilidade */
+    overflow-x: hidden; /* Evita rolagem horizontal em excesso */
+}
+
+/* Garante que imagens sejam responsivas e não causem overflow */
+img {
+    display: block; /* Remove espaço extra abaixo de imagens */
+    max-width: 100%; /* Garante que a imagem não seja maior que seu contêiner */
+    height: auto; /* Mantém a proporção da imagem ao redimensionar */
+}
+
+/* Container principal para centralizar e padronizar o conteúdo */
+.container {
+    max-width: 1000px; /* Largura máxima para o conteúdo principal */
+    margin: 40px auto; /* Centraliza o container e adiciona margem superior/inferior */
+    padding: 20px; /* Espaçamento interno */
+    background: var(--secondary-color); /* Fundo do container: Branco */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 12px var(--box-shadow-light); /* Sombra suave para profundidade */
+}
+
+/* ESTILOS DE FOCO PARA ACESSIBILIDADE: Para usuários que navegam com teclado. */
+/* Garante um feedback visual claro ao interagir com elementos focáveis. */
+input:focus,
+select:focus,
+button:focus,
+a:focus { /* Inclui links como os botões do carrossel e do WhatsApp popup */
+    outline: 2px solid var(--accent-color); /* Foco na cor vermelha do tema */
+    outline-offset: 3px; /* Afasta o outline da borda do elemento */
+    border-radius: 5px; /* Pequeno arredondamento para o outline se necessário */
+}
+
+/* Classe para esconder elementos visualmente mas mantê-los para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================= */
+/* CABEÇALHO DO SITE: Contém o logotipo     */
+/* ========================================= */
+.site-header {
+    text-align: center; /* Centraliza o logo */
+    padding: 10px 0; /* Padding vertical total do cabeçalho */
+    background-color: var(--secondary-color); /* Fundo branco para o cabeçalho */
+    box-shadow: 0 2px 8px var(--box-shadow-light); /* Sombra sutil abaixo do cabeçalho */
+    
+    /* PROPRIEDADES PARA DEIXAR O CABEÇALHO FIXO */
+    position: fixed; /* Fixa o cabeçalho na tela */
+    top: 0; /* Alinha o cabeçalho no topo da tela */
+    width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
+    z-index: 100; /* Garante que o cabeçalho fique acima de outros conteúdos ao rolar */
+    /* Altura explícita para evitar layout shifts e garantir compensação precisa */
+    height: var(--header-height-desktop); /* Altura fixa baseada na variável */
+    display: flex; /* Transforma o cabeçalho em container flexível */
+    align-items: center; /* Centraliza o conteúdo (logo) verticalmente */
+    justify-content: center; /* Centraliza o conteúdo (logo) horizontalmente */
+}
+
+.site-header img {
+    max-width: 150px; /* LARGURA MÁXIMA DO LOGO. Reduzido para 150px para melhor encaixe */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Compensação para o cabeçalho fixo no conteúdo principal */
+#main-content {
+    margin-top: var(--header-height-desktop); /* Usa a variável para a altura do cabeçalho desktop */
+}
+
+
+/* ========================================= */
+/* CARROSSEL PRINCIPAL (SEÇÃO HERO)          */
+/* Responsável pela exibição e transição dos slides de destaque. */
+/* ========================================= */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 480px; /* ALTURA DO CARROSSEL EM TELAS MAIORES. Ajuste conforme necessário. */
+    overflow: hidden; /* Esconde conteúdo que ultrapassa a altura/largura */
+}
+
+.carousel-slide {
+    display: none; /* Esconde todos os slides por padrão (o JS controlará o 'active') */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Faz a imagem cobrir toda a área, cortando se necessário */
+    background-position: center; /* Centraliza a imagem de fundo */
+    color: var(--secondary-color); /* Cor do texto no slide: Branco (para contraste com imagens escuras) */
+    text-align: center;
+    display: flex; /* Para centralizar o conteúdo (título, parágrafo, botão) */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centraliza horizontalmente */
+    opacity: 0; /* Começa invisível para o efeito de transição */
+    transition: opacity 1s ease-in-out; /* Transição suave para o efeito de fade */
+    padding: 20px; /* Espaçamento interno para o conteúdo do slide */
+}
+
+.carousel-slide.active {
+    display: flex; /* Mostra o slide ativo */
+    opacity: 1; /* Torna o slide visível */
+}
+
+.carousel-slide h1 {
+    font-size: 44px; /* TAMANHO DA FONTE DO TÍTULO DO CARROSSEL. */
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8); /* Sombra preta mais forte para visibilidade */
+    max-width: 90%; /* Garante que o texto não ultrapasse o largura em telas menores */
+    line-height: 1.2;
+}
+
+.carousel-slide p {
+    font-size: 24px; /* TAMANHO DA FONTE DO PARÁGRAFO DO CARROSSEL. */
+    max-width: 700px; /* Largura máxima para o parágrafo */
+    margin-bottom: 30px; /* AQUI VOCÊ CONTROLA O ESPAÇAMENTO ABAIXO DO PARÁGRAFO PARA POSICIONAR O BOTÃO */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Sombra preta mais forte para visibilidade */
+    max-width: 90%; /* Garante que o texto não ultrapasse o largura em telas menores */
+    line-height: 1.4;
+}
+
+/* ========================================= */
+/* ESTILOS DOS BOTÕES PRINCIPAIS DO CARROSSEL */
+/* ========================================= */
+.carousel-button {
+    padding: 15px 35px; /* Ajuste para um botão um pouco maior */
+    font-size: 19px; /* TAMANHO DA FONTE DO BOTÃO DO CARROSSEL. */
+    font-weight: bold;
+    border-radius: 50px; /* ARREDONDAMENTO DO BOTÃO: Valor alto para formato pílula. */
+    cursor: pointer;
+    text-decoration: none; /* Remove sublinhado do link */
+    /* A transição aqui é para o efeito de hover nativo do CSS */
+    transition: all var(--transition-speed) ease;
+    display: inline-block; /* Garante que padding e margin funcionem corretamente */
+    text-align: center; /* Garante que o texto esteja centralizado */
+
+    /* ESTILO INICIAL DO BOTÃO: Preto com texto branco e BORDA FINA VERMELHA. */
+    background-color: var(--primary-color); /* Preto */
+    color: var(--secondary-color); /* Branco */
+    border: 2px solid var(--accent-color); /* Borda Vermelha */
+}
+
+/* ESTILO DO BOTÃO AO PASSAR O MOUSE OU FOCAR (USANDO APENAS CSS NATIVO) */
+/* Isso deve ser consistente para todos os botões que compartilham a classe .carousel-button */
+.carousel-button:hover,
+.carousel-button:focus { /* Adicionado :focus para acessibilidade */
+    background-color: var(--primary-color); /* Permanece Preto */
+    color: var(--secondary-color); /* Permanece Branco */
+    border-color: var(--accent-color); /* A borda continua Vermelha */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Sombra que "brilha" em vermelho */
+    transform: translateY(-3px); /* Leve levantamento */
+}
+
+
+/* ========================================= */
+/* SETAS DE NAVEGAÇÃO DO CARROSSEL           */
+/* Ajustes para torná-las mais interativas e visualmente agradáveis. */
+/* ========================================= */
+.carousel-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.4); /* Fundo preto mais transparente (40% de opacidade) */
+    color: var(--secondary-color); /* Cor do ícone: Branco */
+    width: 50px; /* Largura para formar o círculo */
+    height: 50px; /* Altura para formar o círculo */
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10; /* Garante que as setas fiquem acima dos slides */
+    font-size: 28px; /* TAMANHO DA FONTE DAS SETAS. */
+    border-radius: 50%; /* Formato redondo */
+    user-select: none; /* Evita seleção de texto ao clicar */
+    border: none; /* Remove borda padrão de botões */
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.carousel-nav-arrow:hover,
+.carousel-nav-arrow:focus { /* Adicionado :focus para acessibilidade */
+    background-color: rgba(0,0,0,0.6); /* Fundo preto um pouco menos transparente no hover (60% de opacidade) */
+    box-shadow: 0 0 10px var(--box-shadow-medium); /* Sombra sutil no hover */
+    transform: translateY(-50%) scale(1.05); /* Leve aumento e mantém centralização vertical */
+}
+.carousel-nav-arrow.prev { left: 20px; }
+.carousel-nav-arrow.next { right: 20px; }
+
+/* ========================================= */
+/* SEÇÃO DE TEXTO INTRODUTÓRIO               */
+/* Texto descritivo sobre a empresa. */
+/* ========================================= */
+.intro-text {
+    text-align: center; /* Centraliza o texto */
+    margin-top: 50px; /* Espaçamento superior maior */
+    margin-bottom: 50px; /* Espaçamento inferior maior */
+}
+
+.intro-text h2 {
+    font-size: 32px; /* TAMANHO DO TÍTULO DA SEÇÃO INTRODUTÓRIA. */
+    color: var(--primary-color); /* COR DO TÍTULO: PRETO */
+    margin-bottom: 25px;
+}
+
+.intro-text p {
+    font-size: 20px; /* TAMANHO DA FONTE DOS PARÁGRAFOS DA SEÇÃO INTRODUTÓRIA. */
+    max-width: 850px; /* Limita a largura do texto para melhor legibilidade */
+    margin: 0 auto 18px auto; /* Centraliza os parágrafos e adiciona espaçamento inferior */
+    line-height: 1.7; /* Espaçamento entre linhas para melhor leitura */
+    color: var(--primary-color); /* COR DO TEXTO: PRETO */
+}
+
+.intro-text p:last-child {
+    margin-bottom: 0; /* Remove a margem inferior do último parágrafo */
+}
+
+/* ========================================= */
+/* SEÇÃO DE SERVIÇOS (4 imagens)             */
+/* Exibição dos logotipos de serviços. */
+/* ========================================= */
+.partners-section { /* Nome da classe mantido para consistência, mas agora representa "Serviços" */
+    text-align: center; /* Centraliza o título e o grid de serviços */
+    margin-top: 50px; /* Espaçamento superior */
+    margin-bottom: 50px; /* Espaçamento inferior */
+}
+
+.partners-section h2 {
+    font-size: 28px; /* TAMANHO DO TÍTULO DA SEÇÃO DE SERVIÇOS. */
+    color: var(--primary-color); /* Cor do título: Preto */
+    margin-bottom: 30px; /* Espaçamento abaixo do título */
+}
+
+.partners-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha em telas menores */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 30px; /* Espaçamento entre os logotipos */
+    padding: 0 20px; /* Padding nas laterais para telas pequenas */
+}
+
+.partner-item { /* Nome da classe mantido, mas agora representa "Serviço Item" */
+    width: 150px; /* Define uma largura fixa para cada item, correspondente ao tamanho máximo da imagem */
+    height: 150px; /* Garante altura fixa para a caixa */
+    flex-shrink: 0; /* Impede que os itens diminuam em telas maiores, garantindo que fiquem lado a lado */
+    display: flex; /* Para centralizar a imagem dentro do item */
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color); /* Fundo branco para os logotipos */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno para a imagem */
+    box-shadow: 0 2px 8px var(--box-shadow-light); /* Sombra suave para cada item */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.partner-item:hover,
+.partner-item:focus-within { /* focus-within para acessibilidade ao focar o link da imagem */
+    transform: translateY(-5px); /* Leve levantamento no hover/focus */
+    box-shadow: 0 6px 15px var(--box-shadow-medium); /* Sombra mais pronunciada no hover/focus */
+}
+
+.partner-item img {
+    max-width: 100%; /* Garante que a imagem preencha a largura do contêiner */
+    max-height: 100%; /* Garante que a imagem não ultrapasse a altura do contêiner */
+    object-fit: contain; /* Redimensiona a imagem para caber na caixa sin cortar */
+    filter: grayscale(100%); /* Começa em preto e branco para um visual más clean */
+    opacity: 0.7; /* Levemente transparente */
+    transition: filter var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.partner-item img:hover,
+.partner-item img:focus {
+    filter: grayscale(0%); /* Remove o preto e branco no hover/focus */
+    opacity: 1; /* Opacidade total no hover/focus */
+}
+
+/* ========================================= */
+/* NOVA SEÇÃO: GALERIA DE LOGOTIPOS (16 imagens) */
+/* Exibição de múltiplos logotipos sin links. */
+/* ========================================= */
+.logo-gallery-section {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.logo-gallery-section h2 {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.logo-gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaçamento entre os logotipos na grade de 16 */
+    padding: 0 10px; /* Padding um pouco menor para acomodar más itens */
+}
+
+.logo-item {
+    width: 120px; /* Tamaño ligeramente menor para caber más en una línea */
+    height: 120px; /* Altura correspondiente */
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 8px; /* Padding interno menor */
+    box-shadow: 0 2px 6px var(--box-shadow-light); /* Sombra más suave */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.logo-item:hover,
+.logo-item:focus-within {
+    transform: translateY(-3px); /* Levantamiento sutil */
+    box-shadow: 0 4px 10px var(--box-shadow-medium); /* Sombra un poco más fuerte */
+}
+
+.logo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(80%); /* Más cinza para os logotipos sin link */
+    opacity: 0.8;
+    transition: filter var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.logo-item img:hover,
+.logo-item img:focus {
+    filter: grayscale(0%); /* Colore no hover/focus */
+    opacity: 1;
+}
+
+/* ========================================= */
+/* NOVA SEÇÃO: FUNDO PRETO COM LOGOS DE 5 ITENS */
+/* Seção com fundo escuro e 5 logos com efeito. */
+/* ========================================= */
+.new-black-section {
+    background-color: var(--primary-color); /* Fundo preto */
+    padding: 60px 0; /* Espaçamento interno superior e inferior */
+    text-align: center;
+    margin-top: 50px; /* Espaçamento superior da seção */
+    margin-bottom: 50px; /* Espaçamento inferior da seção */
+    overflow: hidden; /* Garante que a sombra não seja cortada */
+}
+
+.new-black-section .container {
+    background-color: transparent; /* Remove o fundo branco padrão do .container */
+    box-shadow: none; /* Remove a sombra padrão do .container */
+    padding: 0; /* Remove padding extra do .container aqui, pois a section já tem padding */
+}
+
+.new-black-section h2 {
+    font-size: 32px;
+    color: var(--secondary-color); /* Título branco para contraste */
+    margin-bottom: 40px;
+}
+
+.new-logo-grid-5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Espaçamento entre os 5 logos */
+    padding: 0 20px; /* Padding lateral para responsividade */
+}
+
+.new-logo-item-5 {
+    width: 150px; /* Tamanho fixo para cada item, igual ao dos serviços */
+    height: 150px; /* Altura correspondente */
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Fundo transparente (sin borda visível) */
+    border-radius: 10px;
+    padding: 10px; /* Espaçamento interno */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    cursor: default; /* Indica que no es clicable como un link */
+    outline: none; /* Remove o outline padrão em foco para que a sombra funcione */
+}
+
+.new-logo-item-5 img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(0%); /* Imagens COLORIDAS por padrão */
+    opacity: 1; /* Opacidade TOTAL por padrão */
+    transition: filter var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+/* EFEITO DE MOVIMENTO E SOMBRA VERMELHA SUAVE AO PASSAR O MOUSE (e FOCO) */
+.new-logo-item-5:hover,
+.new-logo-item-5:focus-within { /* focus-within para acessibilidade ao focar o item */
+    transform: translateY(-10px); /* Levanta o item um poco más */
+    box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4); /* Sombra vermelha más fuerte (ajuste opacidad para más suave si quiere) */
+}
+.new-logo-item-5:hover img, /* Garante que a imagem está normal no hover */
+.new-logo-item-5:focus-within img {
+    filter: grayscale(0%); /* Imagens COLORIDAS no hover/foco */
+    opacity: 1; /* Opacidade TOTAL no hover/foco */
+}
+
+
+/* ========================================= */
+/* SEÇÃO DE BENEFÍCIOS                        */
+/* Lista de diferenciais da Exception Seguros. */
+/* ========================================= */
+.benefits h2, .form-section h2 {
+    font-size: 28px; /* TAMANHO DOS TÍTULOS DAS SEÇÕES (Benefícios e Formulário). */
+    color: var(--primary-color); /* COR DOS TÍTULOS: PRETO */
+    margin-bottom: 25px;
+    text-align: center;
+}
+.benefits ul {
+    list-style: none; /* Remove o estilo padrão da lista */
+    padding: 0;
+}
+.benefits li {
+    padding: 12px 0;
+    font-size: 19px; /* TAMANHO DA FONTE DOS ITENS DA LISTA DE BENEFÍCIOS. */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--light-gray); /* Linha sutil entre os itens */
+    color: var(--primary-color); /* COR DO TEXTO: PRETO */
+}
+.benefits li:last-child {
+    border-bottom: none; /* Remove a linha do último item */
+}
+.benefits li::before {
+    content: "✅"; /* ÍCONE DO CHECKLIST. Pode ser substituído por otros emojis ou ícones (ex: "\2705"). */
+    margin-right: 12px;
+    color: var(--accent-color); /* Cor do ícone do checklist: Vermelho */
+    font-size: 22px; /* TAMANHO DO ÍCONE DO CHECKLIST. */
+}
+
+/* ========================================= */
+/* ESTILOS DO NOVO FORMULÁRIO DE COTAÇÃO VIA WHATSAPP (Substituindo o anterior) */
+/* ========================================= */
+.form-section {
+    background-color: var(--secondary-color); /* Fundo branco para a seção */
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.975);
+    margin: 100px auto; /* Centraliza a seção com margem superior/inferior */
+    max-width: 600px; /* Largura máxima para formulários em desktop */
+    text-align: center;
+}
+
+.form-section h2 {
+    color: var(--primary-color); /* Texto preto */
+    font-size: 2.2em; /* Tamanho maior para o título */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.form-section form {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    gap: 18px; /* Espaçamento entre os campos */
+}
+
+.form-section label {
+    text-align: left; /* Alinha o texto da label à esquerda */
+    color: var(--dark-gray-text); /* Cor escura para o texto da label */
+    font-weight: 600; /* Um pouco mais encorpado */
+    margin-bottom: 5px; /* Espaço abaixo da label */
+    display: block; /* Garante que a label ocupe sua própria linha */
+}
+
+.form-section input[type="text"],
+.form-section input[type="tel"],
+.form-section select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--medium-gray); /* Borda cinza clara */
+    border-radius: 6px; /* Bordas levemente arredondadas */
+    font-size: 1.1em;
+    color: var(--primary-color); /* Cor do texto dentro dos campos: Preto */
+    background-color: var(--light-gray); /* Fundo levemente cinza nos campos */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave ao focar */
+}
+
+.form-section input[type="text"]:focus,
+.form-section input[type="tel"]:focus,
+.form-section select:focus {
+    border-color: var(--accent-color); /* Borda vermelha ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.3); /* Sombra suave vermelha ao focar (usando rgba do vermelho) */
+}
+
+.form-section button[type="submit"] {
+    background-color: var(--accent-color); /* Fundo vermelho */
+    color: var(--secondary-color); /* Texto branco */
+    padding: 16px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições para hover */
+    margin-top: 25px; /* Espaçamento superior */
+    width: 100%; /* Ocupa toda a largura */
+}
+
+.form-section button[type="submit"]:hover {
+    background-color: #C0392B; /* Um tom de vermelho mais escuro no hover */
+    transform: translateY(-2px); /* Efeito de elevação sutil */
+}
+
+/* ========================================= */
+/* RODAPÉ (FOOTER)                            */
+/* Informações de contato e direitos autorais. */
+/* ========================================= */
+footer {
+    background-color: var(--primary-color); /* Fundo do rodapé: Preto */
+    padding: 25px;
+    text-align: center;
+    font-size: 15px; /* TAMANHO DA FONTE DO RODAPÉ. */
+    color: var(--secondary-color); /* Cor do texto do rodapé: Branco */
+    margin-top: 50px; /* Espaçamento superior do rodapé */
+}
+footer p {
+    margin-bottom: 8px; /* Espaçamento entre os parágrafos do rodapé */
+}
+footer p:last-child {
+    margin-bottom: 0;
+}
+footer a {
+    color: var(--secondary-color); /* Garante que links no footer sejam brancos */
+    text-decoration: underline; /* Adiciona sublinhado para indicar que es un link */
+    transition: color var(--transition-speed) ease;
+}
+footer a:hover,
+footer a:focus {
+    color: var(--accent-color); /* Links vermelhos no hover/focus no footer */
+    text-decoration: none; /* Remove sublinhado no hover/focus */
+}
+
+
+/* ========================================= */
+/* BOTÃO FLUTUANTE DO WHATSAPP (Gatilho do Pop-up) */
+/* ========================================= */
+.whatsapp-float {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 25px; /* DISTÂNCIA DA PARTE INFERIOR DA TELA. */
+    right: 25px; /* DISTÂNCIA DA DIREITA DA TELA. */
+    background-color: var(--whatsapp-green); /* Verde do WhatsApp */
+    color: var(--secondary-color); /* Branco */
+    font-size: 15px; /* TAMANHO DA FONTE DO TEXTO "Consultor Online". */
+    padding: 12px 18px; /* Espaçamento interno */
+    border-radius: 50px; /* Torna o botão arredondado */
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px var(--box-shadow-medium); /* Sombra para o botão */
+    z-index: 998; /* Fica abaixo do pop-up, mas acima do conteúdo normal */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre o ícone e o texto */
+    border: none; /* Remove a borda padrão de botões */
+    cursor: pointer; /* Indica que es clicable */
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.whatsapp-float.pulse-animation { /* Aplica a animação de pulso */
+    animation: pulse 2s infinite; /* Nome da animação, duração, repetição */
+}
+@keyframes pulse { /* Definição da animação de pulso */
+    0% { transform: scale(1); box-shadow: 0 4px 10px var(--box-shadow-medium); }
+    50% { transform: scale(1.05); box-shadow: 0 4px 20px var(--whatsapp-green); } /* Cresce e brilha */
+    100% { transform: scale(1); box-shadow: 0 4px 10px var(--box-shadow-medium); }
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus { /* Adicionado :focus para acessibilidade */
+    background-color: var(--whatsapp-green-hover); /* Verde más escuro no hover */
+    box-shadow: 0 4px 15px var(--box-shadow-dark);
+    transform: translateY(-2px) scale(1); /* Mantém escala normal se animado */
+}
+.whatsapp-float img {
+    width: 35px; /* TAMANHO DO ÍCONE DO WHATSAPP. */
+    height: 35px;
+    vertical-align: middle; /* Alinha a imagem com o texto */
+}
+
+/* ========================================= */
+/* ESTILOS DO POP-UP INTERATIVO DO WHATSAPP  */
+/* O overlay e a caixa de diálogo do pop-up. */
+/* ========================================= */
+.whatsapp-popup-overlay {
+    display: none; /* Esconde o pop-up por padrão (JS vai mudar para 'flex') */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Fundo escurecido e semi-transparente (más escuro) */
+    z-index: 1000; /* Garante que fique acima de tudo, inclusive do botão flutuante */
+    justify-content: center;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    opacity: 0; /* Começa totalmente transparente */
+    visibility: hidden; /* Garante que não interfira com eventos de mouse/toque quando escondido */
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease; /* Transição suave de visibilidade */
+}
+
+.whatsapp-popup-overlay.active {
+    display: flex; /* Torna o overlay visível */
+    opacity: 1; /* Torna opaco */
+    visibility: visible; /* Torna clicável */
+}
+
+.whatsapp-popup-content {
+    background-color: var(--secondary-color); /* Fundo do pop-up: Branco */
+    padding: 35px; /* Más padding interno */
+    border-radius: 12px; /* Bordas más arredondadas */
+    box-shadow: 0 8px 25px var(--box-shadow-dark); /* Sombra más pronunciada */
+    text-align: center;
+    position: relative;
+    max-width: 380px; /* Largura máxima do pop-up */
+    width: 90%; /* Responsivo: 90% da largura da tela */
+    transform: translateY(20px); /* Efeito de entrada: começa um poco abajo */
+    opacity: 0; /* Efeito de entrada: começa invisível */
+    transition: transform var(--transition-speed) ease-out, opacity var(--transition-speed) ease-out; /* Transição suave para o pop-up */
+}
+
+.whatsapp-popup-overlay.active .whatsapp-popup-content {
+    transform: translateY(0); /* Sube para la posición final */
+    opacity: 1; /* Torna visible */
+}
+
+.whatsapp-popup-close {
+    position: absolute;
+    top: 15px; /* Posición del 'X' */
+    right: 20px;
+    font-size: 30px; /* Tamaño más grande para el 'X' */
+    cursor: pointer;
+    color: var(--medium-gray); /* Color del 'X' */
+    transition: color var(--transition-speed) ease; /* Transición para el hover */
+}
+.whatsapp-popup-close:hover,
+.whatsapp-popup-close:focus { /* Adicionado :focus para acessibilidade */
+    color: var(--primary-color); /* Color del 'X' en el hover: Preto */
+}
+
+.consultant-info {
+    margin-bottom: 25px; /* Más espacio debajo del bloque del consultor */
+}
+
+.consultant-photo {
+    width: 90px; /* TAMANHO DA IMAGEM DO CONSULTOR. */
+    height: 90px;
+    border-radius: 50%; /* Torna a imagem circular */
+    object-fit: cover; /* Garante que a imagem preencha o círculo sin distorcer */
+    border: 4px solid var(--accent-color); /* Borda vermelha na imagem do consultor */
+    margin: 0 auto 12px auto; /* Centraliza a imagem e adiciona margem inferior */
+    display: block;
+}
+
+.consultant-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary-color); /* COR DO NOME DO CONSULTOR: PRETO */
+}
+
+.whatsapp-popup-message {
+    font-size: 18px;
+    color: var(--primary-color); /* COR DA MENSAGEM: PRETO */
+    margin-bottom: 30px;
+}
+
+.whatsapp-popup-button {
+    display: inline-block;
+    background-color: var(--primary-color); /* COR DE FUNDO DO BOTÃO NO POP-UP: PRETO */
+    color: var(--secondary-color); /* BRANCO */
+    padding: 14px 30px;
+    border-radius: 50px; /* Botão arredondado */
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+.whatsapp-popup-button:hover,
+.whatsapp-popup-button:focus { /* Adicionado :focus para acessibilidade */
+    background-color: var(--primary-color); /* PERMANECE PRETO no hover */
+    color: var(--secondary-color); /* PERMANECE BRANCO no hover */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Sombra que "brilha" em vermelho no hover */
+    transform: translateY(-3px); /* Leve levantamento no hover */
+}
+
+
+/* ========================================= */
+/* MEDIA QUERIES PARA RESPONSIVIDADE        */
+/* Ajustes de layout para diferentes tamanhos de tela. */
+/* ========================================= */
+
+/* Para telas de TABLETS e CELULARES GRANDES (até 768px de largura) */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 10px 0; /* Ajuste o padding para tablets */
+        height: var(--header-height-tablet); /* Altura fixa para tablets */
+    }
+    .site-header img {
+        max-width: 130px; /* Logo menor em tablets */
+    }
+
+    /* Ajuste de compensação para o cabeçalho fixo em tablets */
+    #main-content {
+        margin-top: var(--header-height-tablet);
+    }
+
+    .carousel-container {
+        height: 380px; /* Altura do carrossel em tablets */
+    }
+
+    .carousel-slide h1 {
+        font-size: 36px; /* Título do carrossel menor */
+    }
+
+    .carousel-slide p {
+        font-size: 19px; /* Parágrafo do carrossel menor */
+    }
+
+    .carousel-button {
+        padding: 12px 30px;
+        font-size: 17px;
+    }
+
+    .carousel-nav-arrow {
+        width: 45px; /* Ajuste para o círculo menor */
+        height: 45px;
+        font-size: 22px;
+        left: 15px;
+        right: 15px;
+    }
+
+    .container {
+        margin: 30px auto;
+        padding: 18px;
+    }
+
+    .intro-text {
+        margin-top: 35px;
+        margin-bottom: 35px;
+    }
+    .intro-text h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    .intro-text p {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .partners-grid {
+        gap: 20px; /* Menos espaço entre as imagens em tablets */
+    }
+    .partner-item {
+        width: 130px; /* Largura um pouco menor em tablets */
+        height: 130px;
+        padding: 8px;
+    }
+    .partners-section h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .logo-gallery-grid {
+        gap: 15px;
+    }
+    .logo-item {
+        width: 100px; /* Tamanho menor em tablets */
+        height: 100px;
+        padding: 6px;
+    }
+    .logo-gallery-section h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    /* Nova seção em telas menores */
+    .new-black-section h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    .new-logo-grid-5 {
+        gap: 20px; /* Espaçamento ajustado */
+    }
+    .new-logo-item-5 {
+        width: 130px; /* Tamanho ajustado para tablets */
+        height: 130px;
+        padding: 8px;
+    }
+
+
+    .benefits h2, .form-section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .benefits li {
+        font-size: 17px;
+        padding: 10px 0;
+    }
+    .benefits li::before {
+        font-size: 20px;
+    }
+
+    .form-section {
+        margin-top: 40px; /* Ajuste para o espaçamento em tablets */
+    }
+    .form-section form {
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .form-section input,
+    .form-section select,
+    .form-section button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    footer {
+        padding: 20px;
+        font-size: 13px;
+        margin-top: 30px;
+    }
+    footer p {
+        margin-bottom: 6px;
+    }
+
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+    .whatsapp-float img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .whatsapp-popup-content {
+        padding: 30px;
+    }
+    .consultant-photo {
+        width: 80px;
+        height: 80px;
+    }
+    .consultant-name {
+        font-size: 18px;
+    }
+    .whatsapp-popup-message {
+        font-size: 16px;
+    }
+    .whatsapp-popup-button {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+}
+
+/* Para telas de CELULARES PEQUENOS (até 480px de largura) */
+@media (max-width: 480px) {
+    .site-header {
+        padding: 8px 0; /* Ajuste o padding para celulares */
+        height: var(--header-height-mobile); /* Altura fixa para celulares */
+    }
+    .site-header img {
+        max-width: 100px; /* Logo menor em celulares */
+    }
+
+    /* Ajuste de compensação para o cabeçalho fixo em celulares */
+    #main-content {
+        margin-top: var(--header-height-mobile);
+    }
+
+    .carousel-container {
+        height: 300px; /* Altura do carrossel em celulares */
+    }
+
+    .carousel-slide h1 {
+        font-size: 28px;
+    }
+    .carousel-slide p {
+        font-size: 15px;
+    }
+    .carousel-button {
+        font-size: 15px;
+        padding: 10px 25px;
+    }
+    .carousel-nav-arrow {
+        display: none; /* Esconde as setas em telas muito pequenas para economizar espaço. O autoplay ainda funcionará. */
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 15px;
+    }
+
+    .intro-text {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .intro-text h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    .intro-text p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .partners-grid {
+        gap: 15px; /* Menos espaço entre as imagens em celulares */
+    }
+    .partner-item {
+        width: 100px; /* Largura menor em celulares */
+        height: 100px;
+        padding: 5px;
+    }
+    .partners-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .logo-gallery-grid {
+        gap: 10px;
+    }
+    .logo-item {
+        width: 80px; /* Tamanho menor em celulares */
+        height: 80px;
+        padding: 4px;
+    }
+    .logo-gallery-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Nova seção em telas menores */
+    .new-black-section h2 {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    .new-logo-grid-5 {
+        gap: 15px; /* Espaçamento ajustado */
+    }
+    .new-logo-item-5 {
+        width: 100px; /* Tamanho ajustado para celulares */
+        height: 100px;
+        padding: 5px;
+    }
+
+
+    .benefits h2, .form-section h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .benefits li {
+        font-size: 15px;
+        padding: 8px 0;
+    }
+    .benefits li::before {
+        font-size: 18px;
+    }
+
+    .form-section {
+        margin-top: 30px; /* Ajuste para o espaçamento em celulares */
+    }
+    .form-section form {
+        gap: 12px;
+        margin-top: 15px;
+    }
+    .form-section input,
+    .form-section select,
+    .form-section button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    footer {
+        padding: 15px;
+        font-size: 12px;
+        margin-top: 25px;
+    }
+    footer p {
+        margin-bottom: 5px;
+    }
+
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .whatsapp-popup-content {
+        padding: 25px;
+    }
+    .consultant-photo {
+        width: 60px;
+        height: 60px;
+    }
+    .consultant-name {
+        font-size: 16px;
+    }
+    .whatsapp-popup-message {
+        font-size: 14px;
+    }
+    .whatsapp-popup-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
