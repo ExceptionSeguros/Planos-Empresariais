@@ -102,7 +102,7 @@ a:focus { /* Inclui links como os botões do carrossel e do WhatsApp popup */
 }
 
 .site-header img {
-    max-width: 150px; /* LARGURA MÁXIMA DO LOGO. Reduzido para 150px para melhor encaixe */
+    max-width: 100px; /* LARGURA MÁXIMA DO LOGO. Reduzido para 150px para melhor encaixe */
     height: auto; /* Mantém a proporção da imagem */
 }
 
