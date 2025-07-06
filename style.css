@@ -18,7 +18,7 @@
     /* NOVAS VARIÁVEIS DE ALTURA DO CABEÇALHO (Ajustadas para logo 150px) */
     --header-height-desktop: 70px; /* Altura do cabeçalho em desktop */
     --header-height-tablet: 60px; /* Altura do cabeçalho em tablet */
-    --header-height-mobile: 50px; /* Altura do cabeçalho em mobile */
+    --header-height-mobile: 70px; /* Altura do cabeçalho em mobile */
 }
 
 /* ========================================= */
