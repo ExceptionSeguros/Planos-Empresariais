@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Lógica de Alternância de Nomes no Botão WhatsApp
-    const consultoras = ["OI TUDO BOM? ME CHAMO AGATHA", "Agatha| OI TUDO BEM? ESTOU ONLINE"];
+    const consultoras = ["OI TUDO BOM? ME CHAMO JULIA", "MARIA| OI TUDO BEM? ESTOU ONLINE","TATIANE| ESTOU AQUI PARA TE OFERECER O MELHOR!"];
     let consultoraIndex = 0;
     const consultorOnlineText = document.getElementById('consultorOnlineText');
 
